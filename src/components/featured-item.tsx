@@ -14,7 +14,7 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
 
   return (
     <a href={`/shop/${produto.slug}`} className="relative block lg:pt-20 lg:pb-16">
-      <div className="bg-background1 rounded-3xl p-8 lg:p-10 lg:ml-12 lg:w-3/5 lg:min-h-[300px] flex flex-col justify-center gap-3">
+      <div className="bg-background1 rounded-3xl p-8 lg:p-10 lg:w-4/5 lg:min-h-[300px] flex flex-col justify-center gap-3">
         <h2
           className="text-2xl lg:text-3xl font-bold text-text line-clamp-2"
           title={produto.nome}
@@ -44,10 +44,10 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
             src={getProdutoImagemDestaque(produto)}
             alt={produto.nome}
             onError={() => setImgOk(false)}
-            className="w-full max-w-[340px] lg:max-w-[720px] h-auto object-contain"
+            className="w-full max-w-[360px] lg:max-w-[860px] h-auto object-contain"
           />
         ) : (
-          <div className="w-full max-w-[340px] lg:max-w-[720px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
+          <div className="w-full max-w-[360px] lg:max-w-[860px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
             {produto.nome}
           </div>
         )}
