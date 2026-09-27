@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../use-cases/shared";
 
 export const CheckoutForm = () => {
   const [state, setState] = useState({
@@ -7,6 +8,7 @@ export const CheckoutForm = () => {
     whatsapp: "",
     tipoEntrega: "retirada" as "retirada" | "delivery",
   });
+  const [enviando, setEnviando] = useState(false);
 
   const cart =
     typeof window !== "undefined" && localStorage.getItem("cart")
@@ -19,26 +21,37 @@ export const CheckoutForm = () => {
   );
 
   const handleClick = async () => {
-    const payload = {
-      cliente_nome: state.nome,
-      cliente_email: state.email,
-      contato_whatsapp: state.whatsapp,
-      tipo_entrega: state.tipoEntrega,
-      subtotal: total,
-      total,
-      itens: cart,
-    };
-
-    const response = await fetch("/order/create", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    }).then((res) => res.json());
-
-    if (response?.id) {
-      localStorage.removeItem("cart");
-      window.location.href = `/order/${response.id}`;
+    if (!state.nome || !state.email) {
+      alert("Preencha nome e e-mail.");
+      return;
     }
+
+    setEnviando(true);
+
+    const { data, error } = await supabase
+      .from("pedidos")
+      .insert({
+        status: "aguardando_pagamento",
+        tipo_entrega: state.tipoEntrega,
+        subtotal: total,
+        total,
+        cliente_nome: state.nome,
+        cliente_email: state.email,
+        contato_whatsapp: state.whatsapp,
+        itens: cart,
+      })
+      .select()
+      .single();
+
+    setEnviando(false);
+
+    if (error) {
+      alert("Erro ao enviar pedido: " + error.message);
+      return;
+    }
+
+    localStorage.removeItem("cart");
+    window.location.href = `/pedido-confirmado?id=${data.id}`;
   };
 
   return (
@@ -84,10 +97,11 @@ export const CheckoutForm = () => {
           </select>
         </form>
         <button
-          className="w-full bg-text text-primary p-3 mt-10 rounded font-semibold text-center"
+          className="w-full bg-text text-primary p-3 mt-10 rounded font-semibold text-center disabled:opacity-50"
           onClick={handleClick}
+          disabled={enviando}
         >
-          Confirmar pedido
+          {enviando ? "Enviando..." : "Confirmar pedido"}
         </button>
       </div>
     </div>
