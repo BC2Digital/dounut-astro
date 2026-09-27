@@ -26,14 +26,14 @@ export const ProductCard = ({
         </span>
       </div>
 
-      <div className="relative aspect-[4/5] w-[calc(100%+2.5rem)] -mx-5 mb-4">
+      <div className="relative aspect-square w-full mb-4 rounded-2xl overflow-hidden">
         {imgOk ? (
           <img
             src={getProdutoImagem(produto)}
             alt={produto.nome}
             loading="lazy"
             onError={() => setImgOk(false)}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-text/50 text-sm text-center p-4">
