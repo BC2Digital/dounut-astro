@@ -1,0 +1,15 @@
+---
+import { Products } from "../components/products";
+import Layout from "../layouts/Layout.astro";
+import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
+
+const { produtos } = await fetchFrontPage(300);
+---
+
+<Layout
+  title="Todos os produtos — Hella Confeitaria"
+  description="Cardápio completo da Hella Confeitaria.">
+  <div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
+    <Products produtos={produtos} client:load />
+  </div>
+</Layout>

@@ -22,6 +22,7 @@ export const ProductCard = ({
   return (
     <a
       href={`/shop/${produto.slug}`}
+      title={produto.nome}
       className={`group relative flex flex-col ${bg} rounded-3xl p-5 w-full transition-transform hover:-translate-y-1 hover:shadow-lg`}
     >
       <div className="flex justify-between items-start mb-3">
@@ -49,7 +50,7 @@ export const ProductCard = ({
         )}
       </div>
 
-      <h2 className="text-lg font-bold text-text text-center">
+      <h2 className="text-lg font-bold text-text text-center line-clamp-2">
         {produto.nome}
       </h2>
     </a>

@@ -1,7 +1,13 @@
 import { ProductCard } from "./product-card";
 import type { Produto } from "../use-cases/contracts/Produto";
 
-export const Products = ({ produtos }: { produtos: Produto[] }) => {
+export const Products = ({
+  produtos,
+  verMaisHref,
+}: {
+  produtos: Produto[];
+  verMaisHref?: string;
+}) => {
   return (
     <div id="produtos" className="mt-16 scroll-mt-10">
       <div className="text-center mb-12">
@@ -23,6 +29,17 @@ export const Products = ({ produtos }: { produtos: Produto[] }) => {
         <p className="text-center text-text/60">
           Nenhum produto disponível no momento.
         </p>
+      )}
+
+      {verMaisHref && (
+        <div className="text-center mt-10">
+          <a
+            href={verMaisHref}
+            className="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"
+          >
+            Ver mais
+          </a>
+        </div>
       )}
     </div>
   );
