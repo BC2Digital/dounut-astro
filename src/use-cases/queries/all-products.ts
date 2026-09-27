@@ -1,20 +1,12 @@
-import { apiClient } from "../shared";
+import { supabase } from "../shared";
 
-export async function fetchAllProducts() {
-    try {
-        return await apiClient.catalogueApi(
-            `
-        #graphql
-        {
-          catalogue(path:"/shop"){
-            children {
-              path
-            }
-          }
-        }
-      `
-        );
-    } catch (error) {
-        throw error;
-    }
+export async function fetchAllProductSlugs() {
+  const { data, error } = await supabase
+    .from("produtos")
+    .select("slug")
+    .eq("ativo", true)
+    .not("slug", "is", null);
+
+  if (error) throw error;
+  return data ?? [];
 }
