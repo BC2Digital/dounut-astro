@@ -17,7 +17,7 @@ const grade = produtos.slice(8, 14);
 <Layout
   title="Hella Confeitaria"
   description="Bolos, doces e mimos artesanais da Hella Confeitaria.">
-  <div class="py-6 lg:container mx-auto w-full md:px-0 px-3 flex flex-col gap-8">
+  <div class="py-10 lg:container mx-auto w-full md:px-0 px-3 flex flex-col gap-4">
     {destaque1 && <FeaturedItem produto={destaque1} client:load />}
     <ProductRow produtos={linha1} client:load />
 
