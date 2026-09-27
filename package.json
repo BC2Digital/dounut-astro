@@ -4,13 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "node ./dist/server/entry.mjs",
+    "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^8.2.0",
     "@astrojs/react": "^3.0.9",
     "@astrojs/tailwind": "^5.1.0",
     "@supabase/supabase-js": "^2.45.4",
