@@ -41,10 +41,21 @@ export const Order = () => {
       <div>
         {order.itens?.map((item: any, index: number) => (
           <div key={index} className="flex justify-between mb-4">
-            <p>
-              {item.produto_nome} x {item.quantidade ?? 1}
-            </p>
-            <p>{formatBRL(item.preco ?? 0)}</p>
+            <div>
+              <p>
+                {item.produto_nome} x {item.quantidade ?? 1}
+              </p>
+              {item.personalizacao?.length > 0 && (
+                <ul className="mt-1 text-sm text-text/70">
+                  {item.personalizacao.map((p: any, i: number) => (
+                    <li key={i}>
+                      {p.coluna}: {p.escolhas.join(", ")}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <p>{formatBRL((item.preco ?? 0) * (item.quantidade ?? 1))}</p>
           </div>
         ))}
         <div className="flex flex-col gap-3 border-t-2 pt-5">

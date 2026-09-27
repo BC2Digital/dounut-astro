@@ -17,10 +17,21 @@ export const LocalCart = () => {
       </h1>
       <div className="flex flex-col gap-5 bg-background1 p-20">
         {cart.map((item: any, index: number) => (
-          <div key={index} className="flex justify-between items-center">
-            <p className="font-semibold text-xl">
-              {item.produto_nome} × {item.quantidade}
-            </p>
+          <div key={index} className="flex justify-between items-start">
+            <div>
+              <p className="font-semibold text-xl">
+                {item.produto_nome} × {item.quantidade}
+              </p>
+              {item.personalizacao?.length > 0 && (
+                <ul className="mt-1 text-sm text-text/70">
+                  {item.personalizacao.map((p: any, i: number) => (
+                    <li key={i}>
+                      {p.coluna}: {p.escolhas.join(", ")}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <p>{formatBRL(item.preco * item.quantidade)}</p>
           </div>
         ))}
