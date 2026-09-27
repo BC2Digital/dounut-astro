@@ -1,21 +1,19 @@
 ---
 import { getOrderById } from "../../use-cases/queries/get-order";
-import { Order } from "../../components/order";
 import Layout from "../../layouts/Layout.astro";
-
-export const prerender = false;
+import { Order } from "../../components/order";
 
 const { id } = Astro.params;
-const data = id ? await getOrderById(id) : null;
+const order = id ? await getOrderById(id) : null;
 ---
 
-<Layout title="Order" description="Details of your dounut order.">
-  <div class="lg:container mx-auto w-full lg:px-0 px-4">
+<Layout title="Pedido confirmado" description="Confirmação do pedido">
+  <div class="lg:container mx-auto w-full lg:px-0 px-5">
     {
-      data ? (
-        <Order order={data?.orders?.get} />
+      order ? (
+        <Order order={order} client:load />
       ) : (
-        <h1>Oops! Order not found.</h1>
+        <p>Pedido não encontrado.</p>
       )
     }
   </div>
