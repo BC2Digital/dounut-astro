@@ -41,16 +41,16 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
         </div>
       </div>
 
-      <div className="flex justify-center lg:justify-start lg:-ml-10">
+      <div className="flex justify-center items-center w-full overflow-hidden">
         {imgOk ? (
           <img
             src={getProdutoImagemDestaque(produto)}
             alt={produto.nome}
             onError={() => setImgOk(false)}
-            className="max-w-[320px] lg:max-w-[420px] w-full aspect-square object-cover"
+            className="w-full max-w-[420px] h-auto object-contain"
           />
         ) : (
-          <div className="max-w-[320px] lg:max-w-[420px] w-full aspect-square flex items-center justify-center text-text/50 text-center p-6">
+          <div className="w-full max-w-[420px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
             {produto.nome}
           </div>
         )}
