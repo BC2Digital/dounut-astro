@@ -24,7 +24,7 @@ const linha2 = bentos.slice(5, 8);
     {destaque2 && <FeaturedItem produto={destaque2} client:load />}
     <ProductRow produtos={linha2} client:load />
 
-    <div class="text-center">
+    <div class="text-center mt-6">
       <a
         href="/produtos"
         class="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"
@@ -33,7 +33,7 @@ const linha2 = bentos.slice(5, 8);
       </a>
     </div>
 
-    <div class="mt-20">
+    <div class="mt-6">
       <Products
         produtos={bolos}
         titulo="Bolos Artísticos"
