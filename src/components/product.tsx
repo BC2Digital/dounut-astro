@@ -1,87 +1,76 @@
 import { useState, useEffect } from "react";
-import { ContentTransformer, Image } from "@crystallize/reactjs-components";
-import { ProductBody } from "./product-body";
-import { VariantSelector } from "./variant-selector";
 import { RelatedProducts } from "./related-products";
-import {
-    getCurrencySymbol,
-    getDefaultPriceVariant,
-    variantToCartItem,
-} from "../use-cases/utils";
-import type { Product as ProductType } from "../use-cases/contracts/Product";
+import { formatBRL, getProdutoImagem } from "../use-cases/utils";
+import type { Produto } from "../use-cases/contracts/Produto";
 
-export const Product = ({ product }: { product: ProductType }) => {
-    const [selectedVariant, setSelectedVariant] = useState(
-        product?.variants?.[0]
-    );
-    const onVariantChange = (variant: any) => setSelectedVariant(variant);
-    const defaultPrice = getDefaultPriceVariant(selectedVariant?.priceVariants);
-    const [cart, setCart] = useState<any>([]);
-    const [buttonText, setButtonText] = useState("Add to Cart");
+export const Product = ({
+  produto,
+  relacionados,
+}: {
+  produto: Produto;
+  relacionados: Produto[];
+}) => {
+  const [cart, setCart] = useState<any[]>([]);
+  const [buttonText, setButtonText] = useState("Adicionar ao carrinho");
 
-    const addToCart = (product: any) => {
-        setButtonText("Adding...");
-        const newCart = [...cart, variantToCartItem(product)];
-        setCart(newCart);
-        setButtonText("Added 🎉");
-        setTimeout(() => setButtonText("Add to Cart"), 1000);
-    };
+  useEffect(() => {
+    const stored = localStorage.getItem("cart");
+    if (stored) setCart(JSON.parse(stored));
+  }, []);
 
-    useEffect(() => {
-        const cart = localStorage.getItem("cart");
-        if (cart) {
-            setCart(JSON.parse(cart));
-        }
-    }, []);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-    useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+  const addToCart = () => {
+    setButtonText("Adicionando...");
+    setCart([
+      ...cart,
+      {
+        produto_id: produto.id,
+        produto_nome: produto.nome,
+        preco: produto.preco,
+        quantidade: 1,
+        imagem: getProdutoImagem(produto),
+      },
+    ]);
+    setButtonText("Adicionado!");
+    setTimeout(() => setButtonText("Adicionar ao carrinho"), 1000);
+  };
 
-    return (
+  return (
+    <>
+      <div className="flex lg:flex-row gap-2 w-full items-center flex-col">
+        <div className="flex flex-col text-text w-[400px]">
+          <h1 className="font-extrabold text-5xl mb-3">{produto.nome}</h1>
+          <p>{produto.descricao}</p>
+        </div>
+        <img
+          src={getProdutoImagem(produto)}
+          alt={produto.nome}
+          className="rounded-sm mx-auto max-w-[500px]"
+        />
+      </div>
+      <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl">
+        <div>
+          <p className="font-semibold text-sm">Preço</p>
+          <p className="font-bold text-lg">{formatBRL(produto.preco)}</p>
+        </div>
+        <button
+          className="bg-background2 px-4 rounded-xl"
+          onClick={addToCart}
+        >
+          {buttonText}
+        </button>
+      </div>
+      {relacionados.length > 0 && (
         <>
-            <div className="flex lg:flex-row gap-2 w-full items-center flex-col">
-                <div className="flex flex-col text-text w-[400px]">
-                    <h1 className="font-extrabold text-5xl mb-3">
-                        {product.name}
-                    </h1>
-                    <ContentTransformer
-                        json={product?.summary?.content?.json as [any]}
-                    />
-                </div>
-                <Image
-                    {...product.defaultVariant?.firstImage}
-                    sizes="500px"
-                    className="rounded-sm mx-auto"
-                />
-                <div className="lg:mb-0 mb-5">
-                    <VariantSelector
-                        variants={product.variants!}
-                        selectedVariant={selectedVariant!}
-                        onVariantChange={onVariantChange}
-                    />
-                </div>
-            </div>
-            <div className="flex z-10 justify-between lg:w-5/12 w-8/12 mx-auto bg-white p-5 text-text rounded-xl">
-                <div>
-                    <p className="font-semibold text-sm">Total price</p>
-                    <p className="font-bold text-lg">
-                        {getCurrencySymbol(
-                            defaultPrice?.currency ?? "EUR",
-                            defaultPrice?.price ?? 0.0
-                        )}
-                    </p>
-                </div>
-                <button
-                    className="bg-background2 px-4 rounded-xl"
-                    onClick={() => addToCart(selectedVariant)}
-                >
-                    {buttonText}
-                </button>
-            </div>
-            <ProductBody body={product.body} table={product.table} />
-            <p className="text-text mb-4 font-semibold">Related do(u)nuts</p>
-            <RelatedProducts related={product.related} />
+          <p className="text-text mb-4 font-semibold mt-10">
+            Você também pode gostar
+          </p>
+          <RelatedProducts related={relacionados} />
         </>
-    );
+      )}
+    </>
+  );
 };
