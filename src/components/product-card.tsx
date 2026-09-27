@@ -18,10 +18,10 @@ export const ProductCard = ({
       className={`relative flex flex-col ${bg} rounded-3xl p-5 w-full`}
     >
       <div className="flex justify-between items-start mb-3">
-        <span className="text-xs font-semibold uppercase bg-black/10 text-text px-3 py-1 rounded-full">
+        <span className="text-sm bg-black/5 text-text px-3 py-1 rounded-xl">
           {produto.tag || "Artesanal"}
         </span>
-        <span className="text-sm font-bold text-text">
+        <span className="text-sm text-text">
           {formatBRL(produto.preco)}
         </span>
       </div>

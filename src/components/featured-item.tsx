@@ -21,17 +21,17 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
         >
           {produto.nome}
         </h2>
-        <p className="text-xl font-semibold text-text">
+        <p className="text-xl text-text">
           {formatBRL(produto.preco)}
         </p>
         <div className="flex gap-2 flex-wrap mt-1">
           {novo && (
-            <span className="text-xs font-semibold uppercase bg-black/10 text-text px-3 py-1 rounded-full">
+            <span className="text-sm bg-black/5 text-text px-3 py-1 rounded-xl">
               Novo
             </span>
           )}
           {produto.tag && (
-            <span className="text-xs font-semibold uppercase bg-black/10 text-text px-3 py-1 rounded-full">
+            <span className="text-sm bg-black/5 text-text px-3 py-1 rounded-xl">
               {produto.tag}
             </span>
           )}
