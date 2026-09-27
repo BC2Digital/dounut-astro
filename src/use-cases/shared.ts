@@ -1,1 +1,13 @@
-aW1wb3J0IHsgY3JlYXRlQ2xpZW50IH0gZnJvbSAiQHN1cGFiYXNlL3N1cGFiYXNlLWpzIjsKCi8vIE1lc21vIHByb2pldG8gU3VwYWJhc2UgKCJIZWxsYSBUZXN0ZSIpIHVzYWRvIHBlbG8gYWRtaW4vbG9qYSBlbSBOdXh0LgovLyBFbSBwcm9kdcOnw6NvIChWZXJjZWwpLCBjb25maWd1cmFyIFNVUEFCQVNFX1VSTCBlIFNVUEFCQVNFX0FOT05fS0VZIG5hcwovLyBFbnZpcm9ubWVudCBWYXJpYWJsZXMgZG8gcHJvamV0by4KY29uc3Qgc3VwYWJhc2VVcmwgPQogIGltcG9ydC5tZXRhLmVudi5TVVBBQkFTRV9VUkwgfHwgcHJvY2Vzcy5lbnYuU1VQQUJBU0VfVVJMIHx8ICIiOwpjb25zdCBzdXBhYmFzZUFub25LZXkgPQogIGltcG9ydC5tZXRhLmVudi5TVVBBQkFTRV9BTk9OX0tFWSB8fCBwcm9jZXNzLmVudi5TVVBBQkFTRV9BTk9OX0tFWSB8fCAiIjsKCmV4cG9ydCBjb25zdCBpc1N1cGFiYXNlQ29uZmlndXJlZCA9IEJvb2xlYW4oc3VwYWJhc2VVcmwgJiYgc3VwYWJhc2VBbm9uS2V5KTsKCmV4cG9ydCBjb25zdCBzdXBhYmFzZSA9IGNyZWF0ZUNsaWVudChzdXBhYmFzZVVybCwgc3VwYWJhc2VBbm9uS2V5KTsK
+import { createClient } from "@supabase/supabase-js";
+
+// Mesmo projeto Supabase ("Hella Teste") usado pelo admin/loja em Nuxt.
+// Em produção (Vercel), configurar SUPABASE_URL e SUPABASE_ANON_KEY nas
+// Environment Variables do projeto.
+const supabaseUrl =
+  import.meta.env.SUPABASE_URL || process.env.SUPABASE_URL || "";
+const supabaseAnonKey =
+  import.meta.env.SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || "";
+
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
