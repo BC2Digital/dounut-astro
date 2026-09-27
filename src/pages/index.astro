@@ -18,10 +18,10 @@ const grade = produtos.slice(8, 14);
   title="Hella Confeitaria"
   description="Bolos, doces e mimos artesanais da Hella Confeitaria.">
   <div class="py-6 lg:container mx-auto w-full md:px-0 px-3 flex flex-col gap-8">
-    {destaque1 && <FeaturedItem produto={destaque1} index={0} client:load />}
+    {destaque1 && <FeaturedItem produto={destaque1} client:load />}
     <ProductRow produtos={linha1} client:load />
 
-    {destaque2 && <FeaturedItem produto={destaque2} index={1} client:load />}
+    {destaque2 && <FeaturedItem produto={destaque2} client:load />}
     <ProductRow produtos={linha2} client:load />
 
     <Products produtos={grade} verMaisHref="/produtos" client:load />

@@ -2,22 +2,14 @@ import { useState } from "react";
 import { formatBRL, getProdutoImagem } from "../use-cases/utils";
 import type { Produto } from "../use-cases/contracts/Produto";
 
-const CARD_BACKGROUNDS = [
-  "bg-background2",
-  "bg-background3",
-  "bg-background4",
-  "bg-background5",
-];
-
 export const ProductCard = ({
   produto,
-  index = 0,
+  bg = "bg-background3",
 }: {
   produto: Produto;
-  index?: number;
+  bg?: string;
 }) => {
   const [imgOk, setImgOk] = useState(true);
-  const bg = CARD_BACKGROUNDS[index % CARD_BACKGROUNDS.length];
 
   return (
     <a
