@@ -17,7 +17,7 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
       href={`/shop/${produto.slug}`}
       className="grid lg:grid-cols-2 gap-6 items-center"
     >
-      <div className="bg-background3 rounded-3xl p-8 lg:p-10 flex flex-col gap-3">
+      <div className="bg-background1 rounded-3xl p-8 lg:p-10 flex flex-col gap-3">
         <h2
           className="text-2xl lg:text-3xl font-bold text-text line-clamp-2"
           title={produto.nome}
@@ -41,16 +41,16 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
         </div>
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center lg:justify-start lg:-ml-10">
         {imgOk ? (
           <img
             src={getProdutoImagemDestaque(produto)}
             alt={produto.nome}
             onError={() => setImgOk(false)}
-            className="max-w-[280px] lg:max-w-[340px] w-full aspect-square object-cover rounded-3xl"
+            className="max-w-[320px] lg:max-w-[420px] w-full aspect-square object-cover"
           />
         ) : (
-          <div className="max-w-[280px] lg:max-w-[340px] w-full aspect-square rounded-3xl bg-background3 flex items-center justify-center text-text/50 text-center p-6">
+          <div className="max-w-[320px] lg:max-w-[420px] w-full aspect-square flex items-center justify-center text-text/50 text-center p-6">
             {produto.nome}
           </div>
         )}
