@@ -26,12 +26,12 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
         </p>
         <div className="flex gap-2 flex-wrap mt-1">
           {novo && (
-            <span className="text-xs font-semibold uppercase bg-white/70 text-text px-3 py-1 rounded-full">
+            <span className="text-xs font-semibold uppercase bg-black/10 text-text px-3 py-1 rounded-full">
               Novo
             </span>
           )}
           {produto.tag && (
-            <span className="text-xs font-semibold uppercase bg-white/70 text-text px-3 py-1 rounded-full">
+            <span className="text-xs font-semibold uppercase bg-black/10 text-text px-3 py-1 rounded-full">
               {produto.tag}
             </span>
           )}
