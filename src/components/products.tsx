@@ -4,23 +4,28 @@ import type { Produto } from "../use-cases/contracts/Produto";
 export const Products = ({
   produtos,
   verMaisHref,
-  eyebrow = "Cardápio",
+  eyebrow,
   titulo = "Nossos produtos",
   verMaisLabel = "Ver mais",
+  align = "center",
 }: {
   produtos: Produto[];
   verMaisHref?: string;
   eyebrow?: string;
   titulo?: string;
   verMaisLabel?: string;
+  align?: "left" | "center";
 }) => {
+  const isCenter = align === "center";
   return (
     <div id="produtos" className="mt-16 scroll-mt-10">
-      <div className="text-center mb-12">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
-          {eyebrow}
-        </p>
-        <h2 className="text-3xl lg:text-4xl font-bold text-text">
+      <div className={`${isCenter ? "text-center mb-12" : "text-left mb-6"}`}>
+        {eyebrow && (
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
+            {eyebrow}
+          </p>
+        )}
+        <h2 className={isCenter ? "text-3xl lg:text-4xl font-bold text-text" : "text-2xl lg:text-3xl font-bold text-text"}>
           {titulo}
         </h2>
       </div>
