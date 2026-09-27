@@ -3,27 +3,43 @@ import { FeaturedItem } from "../components/featured-item";
 import { ProductRow } from "../components/product-row";
 import { Products } from "../components/products";
 import Layout from "../layouts/Layout.astro";
-import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
+import { fetchByCategoriaAba } from "../use-cases/queries/by-categoria.ts";
 
-const { produtos } = await fetchFrontPage(14);
+const { produtos: bentos } = await fetchByCategoriaAba("bento-cakes", 8);
+const { produtos: bolos } = await fetchByCategoriaAba("bolos-artisticos", 6);
 
-const destaque1 = produtos[0];
-const linha1 = produtos.slice(1, 4);
-const destaque2 = produtos[4];
-const linha2 = produtos.slice(5, 8);
-const grade = produtos.slice(8, 14);
+const boloDestaque = bolos[0];
+const boloLinha = bolos.slice(1, 6);
 ---
 
 <Layout
   title="Hella Confeitaria"
   description="Bolos, doces e mimos artesanais da Hella Confeitaria.">
   <div class="py-10 lg:container mx-auto w-full md:px-0 px-3 flex flex-col gap-4">
-    {destaque1 && <FeaturedItem produto={destaque1} client:load />}
-    <ProductRow produtos={linha1} client:load />
+    <Products
+      produtos={bentos}
+      eyebrow="Cardápio"
+      titulo="Bentôs"
+      verMaisHref="/produtos"
+      client:load
+    />
 
-    {destaque2 && <FeaturedItem produto={destaque2} client:load />}
-    <ProductRow produtos={linha2} client:load />
+    <div class="mt-16 flex flex-col gap-4">
+      {boloDestaque && <FeaturedItem produto={boloDestaque} client:load />}
+      {boloLinha.length > 0 && <ProductRow produtos={boloLinha} client:load />}
 
-    <Products produtos={grade} verMaisHref="/produtos" client:load />
+      {
+        bolos.length > 0 && (
+          <div class="text-center mt-6">
+            <a
+              href="/produtos"
+              class="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"
+            >
+              Ver mais
+            </a>
+          </div>
+        )
+      }
+    </div>
   </div>
 </Layout>

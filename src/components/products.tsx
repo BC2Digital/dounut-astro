@@ -4,18 +4,24 @@ import type { Produto } from "../use-cases/contracts/Produto";
 export const Products = ({
   produtos,
   verMaisHref,
+  eyebrow = "Cardápio",
+  titulo = "Nossos produtos",
+  verMaisLabel = "Ver mais",
 }: {
   produtos: Produto[];
   verMaisHref?: string;
+  eyebrow?: string;
+  titulo?: string;
+  verMaisLabel?: string;
 }) => {
   return (
     <div id="produtos" className="mt-16 scroll-mt-10">
       <div className="text-center mb-12">
         <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
-          Cardápio
+          {eyebrow}
         </p>
         <h2 className="text-3xl lg:text-4xl font-bold text-text">
-          Nossos produtos
+          {titulo}
         </h2>
       </div>
 
@@ -37,7 +43,7 @@ export const Products = ({
             href={verMaisHref}
             className="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"
           >
-            Ver mais
+            {verMaisLabel}
           </a>
         </div>
       )}
