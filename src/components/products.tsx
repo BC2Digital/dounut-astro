@@ -21,7 +21,7 @@ export const Products = ({
   const isCenter = align === "center";
   return (
     <div id="produtos" className="scroll-mt-10">
-      <div className={isCenter ? "text-center mb-4" : "text-left mb-6"}>
+      <div className={isCenter ? "text-center mb-4" : "text-left mb-10"}>
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
             {eyebrow}
