@@ -29,6 +29,7 @@ module.exports = {
           background4: "#EDDCD2",
           background5: "#FAD2E1",
           grey: "rgba(0, 0, 0, 0.03);",
+          badge: "#E7E5E4",
         },
         fontFamily: {
           text: ["Raleway", "sans-serif"],
