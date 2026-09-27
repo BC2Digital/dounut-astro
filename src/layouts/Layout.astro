@@ -29,7 +29,7 @@ const { pathname } = Astro.url;
     {
       pathname === "/cart" ||
       pathname === "/checkout" ||
-      pathname.startsWith("/order") ? null : (
+      pathname === "/pedido-confirmado" ? null : (
         <div class="absolute inset-0 bg-fixed -z-10">
           <Background />
         </div>
