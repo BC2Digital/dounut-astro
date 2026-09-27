@@ -1,15 +1,18 @@
 ---
+import { Hero } from "../components/hero";
 import { Products } from "../components/products";
 import Layout from "../layouts/Layout.astro";
 import { fetchFrontPage } from "../use-cases/queries/frontpage.ts";
 
 const { produtos } = await fetchFrontPage();
+const destaque = produtos?.[0];
 ---
 
 <Layout
   title="Hella Confeitaria"
   description="Bolos, doces e mimos artesanais da Hella Confeitaria.">
-  <div class="py-10 lg:container mx-auto w-full md:px-0 px-3">
+  <div class="py-6 lg:container mx-auto w-full md:px-0 px-3">
+    <Hero produto={destaque} client:load />
     <Products produtos={produtos} />
   </div>
 </Layout>
