@@ -1,147 +1,27 @@
-import { apiClient } from "../shared";
+import { supabase } from "../shared";
+import type { Produto } from "../contracts/Produto";
 
-export async function fetchProduct(path: String) {
-    try {
-        return await apiClient.catalogueApi(
-            `
-            #graphql
-            query Product($path: String!, $version: VersionLabel) {
-              product: catalogue(path: $path, language: "en", version: $version) {
-                summary: component(id: "brief") {
-                  content {
-                    ... on RichTextContent {
-                      json
-                    }
-                  }
-                }
-                body: component(id: "body") {
-                  content {
-                    ... on ParagraphCollectionContent {
-                      paragraphs {
-                        title {
-                          text
-                        }
-                        body {
-                          json
-                        }
-                        images {
-                          altText
-                          variants {
-                            width
-                            height
-                            url
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                table: component(id: "nutrition") {
-                  content {
-                    ... on PropertiesTableContent {
-                      sections {
-                        title
-                        properties {
-                          key
-                          value
-                        }
-                      }
-                    }
-                  }
-                }
-            
-                ... on Product {
-                  id
-                  name
-                  type
-                  path
-                  defaultVariant {
-                    firstImage {
-                      url
-                      altText
-                      variants {
-                        url
-                        key
-                        width
-                        height
-                        size
-                      }
-                    }
-                  }
-            
-                  variants {
-                    id
-                    name
-                    sku
-                    price
-                    priceVariants {
-                      identifier
-                      name
-                      price
-                      currency
-                    }
-                    stock
-                    isDefault
-                    attributes {
-                      attribute
-                      value
-                    }
-                    images {
-                      url
-                      altText
-                      key
-            
-                      variants {
-                        url
-                        key
-                        width
-                        height
-                        size
-                      }
-                    }
-                  }
-            
-                  vatType {
-                    name
-                    percent
-                  }
-                }
-                related: component(id: "related") {
-                  content {
-                    ... on ItemRelationsContent {
-                      items {
-                        path
-                        name
-                        topics {
-                          name
-                        }
-                        ... on Product {
-                          defaultVariant {
-                            price
-                            firstImage {
-                              url
-                              altText
-                              variants {
-                                url
-                                key
-                                width
-                                height
-                                size
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-            
-          `,
-            { path }
-        );
-    } catch (error) {
-        throw error;
-    }
+export async function fetchProduct(
+  slug: string
+): Promise<{ produto: Produto | null; relacionados: Produto[] }> {
+  const { data: produto, error } = await supabase
+    .from("produtos")
+    .select("*")
+    .eq("slug", slug)
+    .eq("ativo", true)
+    .single();
+
+  if (error || !produto) {
+    return { produto: null, relacionados: [] };
+  }
+
+  const { data: relacionados } = await supabase
+    .from("produtos")
+    .select("*")
+    .eq("categoria_id", produto.categoria_id)
+    .eq("ativo", true)
+    .neq("id", produto.id)
+    .limit(4);
+
+  return { produto, relacionados: relacionados ?? [] };
 }
