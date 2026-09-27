@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Order } from "../components/order";
+---
+
+<Layout title="Pedido confirmado" description="Confirmação do pedido">
+  <div class="lg:container mx-auto w-full lg:px-0 px-5">
+    <Order client:load />
+  </div>
+</Layout>
