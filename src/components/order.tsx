@@ -1,6 +1,39 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../use-cases/shared";
 import { formatBRL } from "../use-cases/utils";
 
-export const Order = ({ order }: { order: any }) => {
+export const Order = () => {
+  const [order, setOrder] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+    supabase
+      .from("pedidos")
+      .select("*")
+      .eq("id", id)
+      .single()
+      .then(({ data }) => {
+        setOrder(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p className="mt-20 text-center text-text">Carregando…</p>;
+  }
+
+  if (!order) {
+    return (
+      <p className="mt-20 text-center text-text">Pedido não encontrado.</p>
+    );
+  }
+
   return (
     <div className="lg:w-auth lg:p-20 bg-background3 mx-auto mt-20 text-text w-full p-10">
       <h1 className="font-bold text-3xl mb-6">Pedido confirmado</h1>
