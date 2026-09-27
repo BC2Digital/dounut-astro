@@ -44,10 +44,10 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
             src={getProdutoImagemDestaque(produto)}
             alt={produto.nome}
             onError={() => setImgOk(false)}
-            className="w-full max-w-[360px] lg:max-w-[860px] h-auto object-contain"
+            className="w-full max-w-[380px] lg:max-w-[1000px] h-auto object-contain"
           />
         ) : (
-          <div className="w-full max-w-[360px] lg:max-w-[860px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
+          <div className="w-full max-w-[380px] lg:max-w-[1000px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
             {produto.nome}
           </div>
         )}
