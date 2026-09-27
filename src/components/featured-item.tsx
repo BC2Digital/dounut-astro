@@ -17,7 +17,7 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
       href={`/shop/${produto.slug}`}
       className="grid lg:grid-cols-2 gap-6 items-center"
     >
-      <div className="bg-background1 rounded-3xl p-8 lg:p-10 flex flex-col gap-3">
+      <div className="bg-background3 rounded-3xl p-8 lg:p-10 flex flex-col gap-3">
         <h2
           className="text-2xl lg:text-3xl font-bold text-text line-clamp-2"
           title={produto.nome}

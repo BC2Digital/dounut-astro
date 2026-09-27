@@ -15,7 +15,7 @@ export const ProductCard = ({
     <a
       href={`/shop/${produto.slug}`}
       title={produto.nome}
-      className={`group relative flex flex-col ${bg} rounded-3xl p-5 w-full transition-transform hover:-translate-y-1 hover:shadow-lg`}
+      className={`relative flex flex-col ${bg} rounded-3xl p-5 w-full`}
     >
       <div className="flex justify-between items-start mb-3">
         <span className="text-xs font-semibold uppercase bg-white/80 text-text px-3 py-1 rounded-full">
@@ -33,7 +33,7 @@ export const ProductCard = ({
             alt={produto.nome}
             loading="lazy"
             onError={() => setImgOk(false)}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-text/50 text-sm text-center p-4">
