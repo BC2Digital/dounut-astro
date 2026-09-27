@@ -18,8 +18,8 @@ export const Products = ({
 }) => {
   const isCenter = align === "center";
   return (
-    <div id="produtos" className="mt-16 scroll-mt-10">
-      <div className={`${isCenter ? "text-center mb-12" : "text-left mb-6"}`}>
+    <div id="produtos" className="scroll-mt-10">
+      <div className={`${isCenter ? "text-center mb-4" : "text-left mb-4"}`}>
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
             {eyebrow}
@@ -43,7 +43,7 @@ export const Products = ({
       )}
 
       {verMaisHref && (
-        <div className="text-center mt-10">
+        <div className="text-center mt-4">
           <a
             href={verMaisHref}
             className="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"
