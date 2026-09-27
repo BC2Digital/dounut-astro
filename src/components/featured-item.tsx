@@ -13,7 +13,7 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
   const novo = isProdutoNovo(produto);
 
   return (
-    <a href={`/shop/${produto.slug}`} className="relative block lg:pt-16 lg:pb-12">
+    <a href={`/shop/${produto.slug}`} className="relative block">
       <div className="bg-background1 rounded-3xl p-8 lg:p-10 lg:w-1/2 lg:min-h-[360px] flex flex-col justify-center gap-3">
         <h2
           className="text-2xl lg:text-3xl font-bold text-text line-clamp-2"
