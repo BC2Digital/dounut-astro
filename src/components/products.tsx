@@ -8,6 +8,7 @@ export const Products = ({
   titulo = "Nossos produtos",
   verMaisLabel = "Ver mais",
   align = "center",
+  cardBg,
 }: {
   produtos: Produto[];
   verMaisHref?: string;
@@ -15,17 +16,18 @@ export const Products = ({
   titulo?: string;
   verMaisLabel?: string;
   align?: "left" | "center";
+  cardBg?: string;
 }) => {
   const isCenter = align === "center";
   return (
     <div id="produtos" className="scroll-mt-10">
-      <div className={`${isCenter ? "text-center mb-4" : "text-left mb-4"}`}>
+      <div className={isCenter ? "text-center mb-4" : "text-left mb-6"}>
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
             {eyebrow}
           </p>
         )}
-        <h2 className={isCenter ? "text-3xl lg:text-4xl font-bold text-text" : "text-2xl lg:text-3xl font-bold text-text"}>
+        <h2 className={isCenter ? "text-3xl lg:text-4xl font-bold text-text" : "text-lg font-semibold text-text"}>
           {titulo}
         </h2>
       </div>
@@ -33,7 +35,7 @@ export const Products = ({
       {produtos?.length ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {produtos.map((produto) => (
-            <ProductCard produto={produto} key={produto.id} />
+            <ProductCard produto={produto} key={produto.id} bg={cardBg} />
           ))}
         </div>
       ) : (

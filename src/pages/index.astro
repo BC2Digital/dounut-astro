@@ -33,12 +33,15 @@ const linha2 = bentos.slice(5, 8);
       </a>
     </div>
 
-    <Products
-      produtos={bolos}
-      titulo="Bolos Artísticos"
-      align="left"
-      verMaisHref="/produtos"
-      client:load
-    />
+    <div class="mt-16">
+      <Products
+        produtos={bolos}
+        titulo="Bolos Artísticos"
+        align="left"
+        cardBg="bg-primary"
+        verMaisHref="/produtos"
+        client:load
+      />
+    </div>
   </div>
 </Layout>
