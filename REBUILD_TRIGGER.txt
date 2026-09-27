@@ -1,0 +1,1 @@
+rebuild disparado em 2026-09-27 para atualizar fotos dos produtos (bento cakes / bolos artisticos) apos correcao das URLs no banco.
