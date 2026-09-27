@@ -26,7 +26,7 @@ export const ProductCard = ({
         </span>
       </div>
 
-      <div className="relative aspect-square w-full mb-4">
+      <div className="relative aspect-square w-[calc(100%+2.5rem)] -mx-5 mb-4">
         {imgOk ? (
           <img
             src={getProdutoImagem(produto)}
