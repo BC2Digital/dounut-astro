@@ -13,8 +13,8 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
   const novo = isProdutoNovo(produto);
 
   return (
-    <a href={`/shop/${produto.slug}`} className="relative block">
-      <div className="bg-background1 rounded-3xl p-8 lg:p-10 lg:pr-[38%] flex flex-col gap-3">
+    <a href={`/shop/${produto.slug}`} className="relative block lg:pt-14 lg:pb-10">
+      <div className="bg-background1 rounded-3xl p-8 lg:p-14 lg:w-3/5 lg:min-h-[420px] flex flex-col justify-center gap-3">
         <h2
           className="text-2xl lg:text-3xl font-bold text-text line-clamp-2"
           title={produto.nome}
@@ -38,16 +38,16 @@ export const FeaturedItem = ({ produto }: { produto: Produto }) => {
         </div>
       </div>
 
-      <div className="flex justify-center mt-6 lg:mt-0 lg:absolute lg:top-1/2 lg:right-0 lg:-translate-y-1/2 lg:translate-x-[6%] w-full lg:w-[48%]">
+      <div className="flex justify-center mt-6 lg:mt-0 lg:absolute lg:-top-16 lg:bottom-[-2.5rem] lg:right-0 lg:w-[58%] z-10">
         {imgOk ? (
           <img
             src={getProdutoImagemDestaque(produto)}
             alt={produto.nome}
             onError={() => setImgOk(false)}
-            className="w-full max-w-[280px] lg:max-w-[480px] h-auto object-contain drop-shadow-xl"
+            className="w-full max-w-[320px] lg:max-w-[640px] h-auto object-contain drop-shadow-2xl"
           />
         ) : (
-          <div className="w-full max-w-[280px] lg:max-w-[480px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
+          <div className="w-full max-w-[320px] lg:max-w-[640px] aspect-square flex items-center justify-center text-text/50 text-center p-6">
             {produto.nome}
           </div>
         )}
