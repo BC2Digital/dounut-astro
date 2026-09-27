@@ -24,12 +24,21 @@ const boloLinha = bolos.slice(1, 6);
       client:load
     />
 
-    <div class="mt-16 flex flex-col gap-4">
-      {boloDestaque && <FeaturedItem produto={boloDestaque} client:load />}
-      {boloLinha.length > 0 && <ProductRow produtos={boloLinha} client:load />}
+    {
+      bolos.length > 0 && (
+        <div class="mt-16 flex flex-col gap-4">
+          <div class="text-center mb-4">
+            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-text/60 mb-2">
+              Cardápio
+            </p>
+            <h2 class="text-3xl lg:text-4xl font-bold text-text">
+              Bolos Artísticos
+            </h2>
+          </div>
 
-      {
-        bolos.length > 0 && (
+          {boloDestaque && <FeaturedItem produto={boloDestaque} client:load />}
+          {boloLinha.length > 0 && <ProductRow produtos={boloLinha} client:load />}
+
           <div class="text-center mt-6">
             <a
               href="/produtos"
@@ -38,8 +47,8 @@ const boloLinha = bolos.slice(1, 6);
               Ver mais
             </a>
           </div>
-        )
-      }
-    </div>
+        </div>
+      )
+    }
   </div>
 </Layout>
