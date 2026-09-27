@@ -1,9 +1,11 @@
-import { supabase } from "../shared";
+import { supabase, isSupabaseConfigured } from "../shared";
 import type { Produto } from "../contracts/Produto";
 
 export async function fetchProduct(
   slug: string
 ): Promise<{ produto: Produto | null; relacionados: Produto[] }> {
+  if (!isSupabaseConfigured) return { produto: null, relacionados: [] };
+
   const { data: produto, error } = await supabase
     .from("produtos")
     .select("*")
