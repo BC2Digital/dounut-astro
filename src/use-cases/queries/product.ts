@@ -23,7 +23,7 @@ export async function fetchProduct(
     .eq("categoria_id", produto.categoria_id)
     .eq("ativo", true)
     .neq("id", produto.id)
-    .limit(4);
+    .limit(6);
 
   return { produto, relacionados: relacionados ?? [] };
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { RelatedProducts } from "./related-products";
+import { Products } from "./products";
 import { formatBRL, getProdutoImagem } from "../use-cases/utils";
 import type { Produto } from "../use-cases/contracts/Produto";
 
@@ -198,12 +198,15 @@ export const Product = ({
       </div>
 
       {relacionados.length > 0 && (
-        <>
-          <p className="text-text mb-4 font-semibold mt-10">
-            Você também pode gostar
-          </p>
-          <RelatedProducts related={relacionados} />
-        </>
+        <div className="mt-16">
+          <Products
+            produtos={relacionados}
+            titulo="Você também pode gostar"
+            align="left"
+            cardBg="bg-primary"
+            verMaisHref="/produtos"
+          />
+        </div>
       )}
     </>
   );
