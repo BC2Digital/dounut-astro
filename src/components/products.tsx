@@ -45,7 +45,7 @@ export const Products = ({
       )}
 
       {verMaisHref && (
-        <div className="text-center mt-4">
+        <div className={isCenter ? "text-center mt-4" : "text-center mt-10"}>
           <a
             href={verMaisHref}
             className="inline-block border-2 border-text/20 text-text px-8 py-3 rounded-full font-semibold hover:bg-white/50 transition"

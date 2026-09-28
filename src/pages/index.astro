@@ -6,12 +6,27 @@ import Layout from "../layouts/Layout.astro";
 import { fetchByCategoriaAba } from "../use-cases/queries/by-categoria.ts";
 
 const { produtos: bentos } = await fetchByCategoriaAba("bento-cakes", 8);
-const { produtos: bolos } = await fetchByCategoriaAba("bolos-artisticos", 6);
 
 const destaque1 = bentos[0];
 const linha1 = bentos.slice(1, 4);
 const destaque2 = bentos[4];
 const linha2 = bentos.slice(5, 8);
+
+// Secoes de categoria exibidas em grade abaixo dos destaques de Bentos.
+// Padrao visual: titulo a esquerda, card claro (bg-primary), 6 itens e
+// botao "Ver mais". Para adicionar uma nova categoria na home, e so
+// incluir um item aqui (aba = campo "aba" da tabela categorias).
+const CATEGORIAS_GRADE = [
+  { aba: "bolos-artisticos", titulo: "Bolos Artísticos" },
+  { aba: "hella-cafe", titulo: "Hella Café" },
+];
+
+const secoesCategorias = await Promise.all(
+  CATEGORIAS_GRADE.map(async (cat) => {
+    const { produtos } = await fetchByCategoriaAba(cat.aba, 6);
+    return { ...cat, produtos };
+  })
+);
 ---
 
 <Layout
@@ -33,15 +48,21 @@ const linha2 = bentos.slice(5, 8);
       </a>
     </div>
 
-    <div class="mt-6">
-      <Products
-        produtos={bolos}
-        titulo="Bolos Artísticos"
-        align="left"
-        cardBg="bg-primary"
-        verMaisHref="/produtos"
-        client:load
-      />
-    </div>
+    {
+      secoesCategorias.map((secao) =>
+        secao.produtos.length > 0 ? (
+          <div class="mt-6">
+            <Products
+              produtos={secao.produtos}
+              titulo={secao.titulo}
+              align="left"
+              cardBg="bg-primary"
+              verMaisHref="/produtos"
+              client:load
+            />
+          </div>
+        ) : null
+      )
+    }
   </div>
 </Layout>
